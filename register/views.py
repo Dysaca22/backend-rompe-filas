@@ -7,13 +7,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
 
 
-class UserView(APIView):
+class UserCreateAPIView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({ 'ok':True }, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({ 'ok': True }, status=status.HTTP_201_CREATED)
+        return Response({'ok': False, 'errors': serializer.errors}, status=status.HTTP_202_ACCEPTED)
 
 
 class UserLoginView(APIView):
