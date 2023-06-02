@@ -7,15 +7,20 @@ from .serializers import QualifySerializer
 from .models import Qualify
 
 
-class QualifyView(APIView):
+class ListQualifyView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, turn):
-        qualifications = Qualify.objects.filter(turn_id=turn)
+    def get(self, request):
+        qualifications = Qualify.objects.all()
         serializer = QualifySerializer(qualifications, many=True)
         return Response(serializer.data)
+
+
+class QualifyView(APIView):
+    permission_classes = [IsAuthenticated]
     
-    def post(self, request):
+    def post(self, request, turn):
+        request.data['turn'] = turn
         serializer = QualifySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

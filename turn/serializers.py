@@ -6,4 +6,4 @@ from .models import Turn
 class TurnSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turn
-        fields = ['date', 'user']
+        fields = ['id', 'date', 'time', 'user']
