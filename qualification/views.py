@@ -13,7 +13,7 @@ class ListQualifyView(APIView):
     def get(self, request):
         qualifications = Qualify.objects.all()
         serializer = QualifySerializer(qualifications, many=True)
-        return Response(serializer.data)
+        return Response({'ok': True, 'qualifications': serializer.data})
 
 
 class QualifyView(APIView):

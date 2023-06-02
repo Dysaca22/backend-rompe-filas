@@ -21,5 +21,5 @@ class UserTurn(APIView):
         serializer = TurnSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({ 'ok':True, 'id':serializer.data.id }, status=status.HTTP_201_CREATED)
+            return Response({ 'ok':True, 'id':serializer.data['id'] }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
